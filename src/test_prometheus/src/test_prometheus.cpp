@@ -46,46 +46,6 @@ public:
     // @note it's the users responsibility to keep the object alive
     registry_ = std::make_shared<prometheus::Registry>();
 
-    // add a new counter family to the registry (families combine values with the
-    // same name, but distinct label dimensions)
-    //
-    // @note please follow the metric-naming best-practices:
-    // https://prometheus.io/docs/practices/naming/
-
-    //   auto builder = prometheus::BuildCounter();
-
-    // auto & counter = builder.Name("observed_packets_total")
-    //                          .Help("Number of observed packets")
-    //                          .Register(*registry_);
-
-
-//    auto family = prometheus::Family<prometheus::Counter> (std::string("name"), std::string("labels"), prometheus::Labels({}));
-
-    // cfam_ = std::make_shared<prometheus::Family<prometheus::Counter> > (std::string("name"), std::string("help string"), prometheus::Labels({}));
-
-
-    // const std::string& help_string = std::string("help string");
-
-
-    // registry_->Add<prometheus::Counter>(cfam_->GetName(), help_string , cfam_->GetConstantLabels());
-    
-    // cfam_ = make_shared<prometheus::Family<prometheus::Counter> >();
-    //std::string("name"), std::string("labels"), prometheus::Labels({}) );
-    
-
-//   // add and remember dimensional data, incrementing those is very cheap
-//   auto& tcp_rx_counter =
-//       packet_counter.Add({{"protocol", "tcp"}, {"direction", "rx"}});
-//   auto& tcp_tx_counter =
-//       packet_counter.Add({{"protocol", "tcp"}, {"direction", "tx"}});
-
-//   // add a counter whose dimensional data is not known at compile time
-//   // nevertheless dimensional values should only occur in low cardinality:
-//   // https://prometheus.io/docs/practices/naming/#labels
-//   auto& http_requests_counter = prometheus::BuildCounter()
-//                                     .Name("http_requests_total")
-//                                     .Help("Number of HTTP requests")
-//                                     .Register(*registry);
 
     const auto labels = prometheus::Gateway::GetInstanceLabel("test_ros_integration_node");
 
@@ -145,8 +105,6 @@ private:
   rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_;
   size_t count_;
   std::shared_ptr<prometheus::Registry> registry_;
-  //   std::shared_ptr<prometheus::Family<prometheus::Counter>& > loop_counter_;
-//   std::shared_ptr<prometheus::Family<prometheus::Counter> > cfam_;
   std::shared_ptr<prometheus::Gateway> gateway_;
 };
 
