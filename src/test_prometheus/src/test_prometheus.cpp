@@ -11,7 +11,7 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific langauge governing permissions and
 // limitations under the License.
 
 #include <chrono>
@@ -20,6 +20,7 @@
 #include <string>
 
 #include <prometheus/counter.h>
+#include <prometheus/gauge.h>
 #include <prometheus/exposer.h>
 #include <prometheus/registry.h>
 #include <prometheus/gateway.h>
@@ -110,6 +111,12 @@ private:
     RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message.data.c_str());
     publisher_->publish(message);
 
+    auto & gauge_fam = prometheus::BuildGauge().Name("callback_2_gauge")
+                             .Help("A random variable")
+                             .Register(*registry_);
+
+
+
     // I'd like to persist this but only returning the reference makes that very hard.
     // Requerying it seems to work.
     auto & counter = prometheus::BuildCounter().Name("callback_2_count")
@@ -117,6 +124,9 @@ private:
                              .Register(*registry_);
 
     const auto random_value = std::rand();
+    auto & gauge_rand = gauge_fam.Add({{"random_variable", "true"}});
+      
+    gauge_rand.Set(random_value);
 
     // add and remember dimensional data, incrementing those is very cheap
     auto& timer_counter =

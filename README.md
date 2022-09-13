@@ -13,3 +13,4 @@ Visit: http://localhost:9090 to view the output
 
 * `rate(timer_callbacks_total[1m])`
 
+* `callback_2_gauge`
