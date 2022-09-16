@@ -42,6 +42,10 @@ macro(build_prometheus_cpp)
   list(APPEND extra_cmake_args "-DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}")
   list(APPEND extra_cmake_args "-DCMAKE_CXX_FLAGS=${CMAKE_CXX_FLAGS}")
 
+  # Speed up the build disabling testing and submodules
+  list(APPEND extra_cmake_args "-DENABLE_TESTING=OFF")
+
+
   if(WIN32 AND NOT ${CMAKE_VERBOSE_MAKEFILE})
     set(should_log ON)  # prevent warnings in Windows CI
   else()
