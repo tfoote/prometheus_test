@@ -9,12 +9,13 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(prometheus_cpp_vendor REQUIRED)
 find_package(prometheus-cpp REQUIRED)
 
 
 add_executable(test_prometheus src/test_prometheus.cpp)
 target_link_libraries(test_prometheus prometheus-cpp-core prometheus-cpp-push)
-ament_target_dependencies(test_prometheus rclcpp std_msgs prometheus-cpp)
+ament_target_dependencies(test_prometheus rclcpp std_msgs prometheus-cpp prometheus_cpp_vendor)
 
 install(TARGETS
   test_prometheus
