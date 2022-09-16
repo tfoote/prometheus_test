@@ -44,6 +44,7 @@ macro(build_prometheus_cpp)
 
   # Speed up the build disabling testing and submodules
   list(APPEND extra_cmake_args "-DENABLE_TESTING=OFF")
+  # TODO(tfoote) An improvement would be to disable the submodules and not need them in the compile
 
 
   if(WIN32 AND NOT ${CMAKE_VERBOSE_MAKEFILE})
