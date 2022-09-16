@@ -14,7 +14,7 @@ find_package(prometheus-cpp REQUIRED)
 
 
 add_executable(test_prometheus src/test_prometheus.cpp)
-target_link_libraries(test_prometheus prometheus-cpp-core prometheus-cpp-push)
+target_link_libraries(test_prometheus prometheus-cpp::core prometheus-cpp::push)
 ament_target_dependencies(test_prometheus rclcpp std_msgs prometheus-cpp prometheus_cpp_vendor)
 
 install(TARGETS
